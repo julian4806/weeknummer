@@ -6,9 +6,9 @@ if ($_GET['user_date'] == '') {
 $user_date = $_GET['user_date'];
 
 $date = new DateTime($user_date);
-$day_number = $date->format("d");
+$day_number = (int)$date->format("d");
 $day_name = $date->format("l");
-$week = $date->format("W");
+$week = (int)$date->format("W");
 $month = $date->format("F");
 $year = $date->format("Y");
 
@@ -47,8 +47,8 @@ function dutch_week_day_names($day)
 function getStartAndEndDate($y, $w)
 {
     return [
-        (new DateTime())->setISODate($y, $w)->format('d ') . dutch_month_names((new DateTime())->setISODate($y, $w)->format('F')), //start date
-        (new DateTime())->setISODate($y, $w, 7)->format('d ') . dutch_month_names((new DateTime())->setISODate($y, $w, 7)->format('F')) //end date
+        (int)(new DateTime())->setISODate($y, $w)->format('d') . " " . dutch_month_names((new DateTime())->setISODate($y, $w)->format('F')), //start date
+        (int)(new DateTime())->setISODate($y, $w, 7)->format('d') . " " . dutch_month_names((new DateTime())->setISODate($y, $w, 7)->format('F')) //end date
     ];
 }
 $user_date_dates = getStartAndEndDate($year, $week); // year and weeknumber
@@ -60,7 +60,7 @@ $user_date_dates = getStartAndEndDate($year, $week); // year and weeknumber
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Week <?= $user_date ?>, <?= $year ?></title>
+    <title>Weeknummer</title>
 </head>
 
 <body>
